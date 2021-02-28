@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Preview</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+  <style type="text/css">
+    body {
+       margin: 0;
+       padding: 0;
+    }
+    html, body, #map{
+       width: 100%;
+       height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+      var map = L.map('map').setView([32.745794816, -79.955424997], 14.0);
+      
+      var harborviewIcon = L.icon({iconUrl:'https://img.icons8.com/fluent-systems-filled/2x/real-estate.png',
+        iconSize: [50,50],
+        popupAnchor: [0,0]
+         });
+      var PopupI = "Harbor View Development: This development was built in the forested area off of Harbor View Road seen in the historic James Island Photo tile layer. This development started being built in the early 2000s and is still expanding.<br/><img src='https://rew-feed-images.global.ssl.fastly.net/ctar/_cloud_media/a/residential/20031207-1-a58bab393dc26ebc9f3a1d2f61a57b65-l.jpg'width='100px'/>";
+      var daMarker = L.marker([32.74331, -79.93224],{icon:harborviewIcon}).addTo(map)
+         .bindPopup(PopupI)
+         //.openPopup();
+        
+      var fortjohnsonIcon = L.icon({iconUrl:'https://img.icons8.com/ios/2x/prefab-house.png',
+        iconSize: [50,50],
+        popupAnchor: [0,0]
+         });
+      var PopupII = "Fort Johnson Development: This development was built on former farmland seen in the historic James Island Photo tile layer. It was built throughout the 1980s - 1990s.<br/><img src='https://patch.com/img/cdn20/users/3761559/20170603/114115/styles/raw/public/article_images/fort-johnson-estates-house2jpg-1496547639-753.jpg'width='100px'/>";
+      var daMarker1 = L.marker([32.72565, -79.93297],{icon:fortjohnsonIcon}).addTo(map)
+         .bindPopup(PopupII)
+         //.openPopup();
+       
+      var lakefrancesIcon = L.icon({iconUrl:'https://img.icons8.com/dotty/2x/real-estate.png',
+        iconSize: [50,50],
+        popupAnchor: [0,0]
+         });
+      var PopupIII = "Lake Frances Drive Development: This development was built on former marshland seen in the historic James Island Photo tile layer. It was built throughout the 1980s - 1990s.<br/><img src='https://ar.rdcpix.com/76c61ed01c70447ac6cace2a54d8231bl-f2192414575xd-w1020_h770_q80.jpg'width='100px'/>";
+      var daMarker2 = L.marker([32.74715, -79.93525],{icon:lakefrancesIcon}).addTo(map)
+         .bindPopup(PopupIII)
+         //.openPopup();
+      
+
+      var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      	maxZoom: 17,
+	      attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        }).addTo(map); 
+
+      var daHistoricalphoto = L.tileLayer('https://obenhan.github.io/GEOG370spring2021/layeredtilemap/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 16,
+        tms: false,
+        attribution: 'USGS'
+      })
+
+      var daTiles = {
+        "Open Topo Map": OpenTopoMap, 
+        "James Island Photo": daHistoricalphoto
+      }
+
+      var daVectors = {
+        "New Harbor View Development": daMarker, 
+        "New Fort Johnson Development": daMarker1,
+        "New Lake Frances Drive Development": daMarker2
+
+        
+      }
+
+      L.control.layers(daTiles,daVectors).addTo(map);
+
+  </script>
+</body>
+</html>
