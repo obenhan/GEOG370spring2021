@@ -27,6 +27,12 @@
   <div id="map"></div>
   <script>
       var map = L.map('map').setView([43.567096706657914, -84.23247179754532], 14.0);
+
+      var OpenTopoMap= L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      	maxZoom: 17,
+	      attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        }).addTo(map);
+        
       L.tileLayer('https://obenhan.github.io/GEOG370spring2021/historicalgeoreferencetile/{z}/{x}/{y}.png', {
         minZoom: 12,
         maxZoom: 16,
